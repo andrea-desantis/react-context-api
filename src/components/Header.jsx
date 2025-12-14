@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useBudget } from "../contexts/BudgetContext";
 export default function Header() {
     const navLinks = [
         {
@@ -14,6 +15,10 @@ export default function Header() {
             path: "/prodotti",
         }
     ]
+
+    // custom hook
+    const { budgetMode, setBudgetMode } = useBudget();
+
     return (
         <header className="navbar bg-body-tertiary px-5 py-4">
             
@@ -27,7 +32,11 @@ export default function Header() {
                         </li>
                     ))}
                 </ul>
-           
+                <button className=""
+                        onClick={() => setBudgetMode(!budgetMode)}
+                >
+                    {budgetMode ? "Modalità Budget Attiva" : "Modalità Budget Disattiva"}
+                </button>
         </header>
     );
 }

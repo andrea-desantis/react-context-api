@@ -20,7 +20,7 @@ function BudgetProvider({ children }) {
 }
 
 function useBudget() {
-    const value = useContext(BudgetContext);
-    return value
+    
+    return useContext(BudgetContext);
 }
-export { BudgetContext, BudgetProvider }
+export { BudgetContext, BudgetProvider, useBudget }
