@@ -6,6 +6,10 @@ const BudgetContext = createContext();
 
 function BudgetProvider({ children }) {
     const [budgetMode, setBudgetMode] = useState(false);
+    const providerValue = {
+        budgetMode,
+        setBudgetMode
+    };
     return (
 
         <BudgetContext.Provider value={providerValue}>
@@ -15,5 +19,8 @@ function BudgetProvider({ children }) {
     );
 }
 
-
+function useBudget() {
+    const value = useContext(BudgetContext);
+    return value
+}
 export { BudgetContext, BudgetProvider }
