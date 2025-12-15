@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useBudget } from "../contexts/BudgetContext";
 export default function Prodotti() {
     const [prodotti, setProdotti] = useState([]);
 
@@ -16,14 +17,16 @@ export default function Prodotti() {
             })
     }, []);
 
+    const { budgetMode } = useBudget();
 
+    const prodottiMostrati = budgetMode ? prodotti.filter((prod) => (prod.price <= 30)) : prodotti;
 
     return (
         <>
 
             <main className="">
                 <ul className="row g-1">
-                    {prodotti.map(prod => (
+                    {prodottiMostrati.map(prod => (
 
                         <li key={prod.id} className="card col-sm-6 col-md-3 col-lg-2">
                             <img src={prod.image} alt="" />
@@ -32,9 +35,9 @@ export default function Prodotti() {
                                 <h6>{prod.category}</h6>
                                 <Link
                                     to={`/prodotti/${prod.id}`}
-                                    className="btn btn-primary mt-2" 
+                                    className="btn btn-primary mt-2"
                                 >
-                                dettagli 
+                                    dettagli
                                 </Link>
 
 
